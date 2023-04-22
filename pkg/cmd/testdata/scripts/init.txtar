@@ -111,7 +111,7 @@ exec chezmoi init
 chhome home12/user
 
 # test chezmoi init --prompt*
-exec chezmoi init --promptBool bool=true --promptInt int=1 --promptString bool=string
+exec chezmoi init --promptBool bool=true,boolOnce=true --promptInt int=1,intOnce=2 --promptString bool=string,stringOnce=once
 cmp $CHEZMOICONFIGDIR/chezmoi.yaml golden/chezmoi.yaml
 
 chhome home13/user
@@ -135,11 +135,20 @@ data:
   bool: true
   int: 1
   string: string
+  boolOnce: true
+  intOnce: 2
+  stringOnce: once
 -- home12/user/.local/share/chezmoi/.chezmoi.yaml.tmpl --
+{{- $boolOnce := promptBoolOnce . "boolOnce" "boolOncePrompt" -}}
+{{- $intOnce := promptIntOnce . "intOnce" "intOncePrompt" -}}
+{{- $stringOnce := promptStringOnce . "stringOncePrompt" -}}
 data:
   bool: {{ promptBool "bool" }}
   int: {{ promptInt "int" }}
   string: {{ promptString "bool" }}
+  boolOnce: {{ $boolOnce }}
+  intOnce: {{ $intOnce}}
+  stringOnce: {{ $stringOnce }}
 -- home13/user/.local/share/chezmoi/.chezmoi.yml.tmpl --
 data:
     key: value
