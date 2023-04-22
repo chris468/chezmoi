@@ -12,6 +12,6 @@ EOF
 curl -fsLS get.chezmoi.io | sh
 export PATH="$HOME/bin:$PATH"
 
-chezmoi execute-template --init --promptString email="me@home.org" < ~/.local/share/chezmoi/.chezmoi.toml.tmpl
+chezmoi --verbose execute-template --init --promptString email="me@home.org" < ~/.local/share/chezmoi/.chezmoi.toml.tmpl
 
-chezmoi init --promptString email="me@home.org"
+chezmoi --verbose init --promptString email="me@home.org"
