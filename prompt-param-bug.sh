@@ -9,6 +9,10 @@ cat > .local/share/chezmoi/.chezmoi.toml.tmpl <<EOF
     email = {{ \$email | quote }}
 EOF
 
+echo ".local/share/chezmoi/.chezmoi.toml.tmpl contents:"
+cat .local/share/chezmoi/.chezmoi.toml.tmpl
+echo
+
 curl -fsLS get.chezmoi.io | sh
 export PATH="$HOME/bin:$PATH"
 
